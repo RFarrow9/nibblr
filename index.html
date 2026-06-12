@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>nibblr — be the eater, or the eaten</title>
+<meta name="description" content="The world's first one-time-use dating app. One match. One meal. No second dates — by design.">
+<meta property="og:title" content="nibblr">
+<meta property="og:description" content="Be the eater, or the eaten. One time use.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #14080a;
+    --bg-2: #1f0d11;
+    --card: #2a1217;
+    --red: #e8253d;
+    --red-2: #ff5d52;
+    --cream: #fdf2ec;
+    --dim: #b89a96;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: radial-gradient(ellipse at 50% -10%, #3a1219 0%, var(--bg) 55%);
+    color: var(--cream);
+    font-family: "Nunito", system-ui, sans-serif;
+    min-height: 100svh;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+
+  /* Hero */
+  .hero { text-align: center; padding: clamp(80px, 16vh, 150px) 0 40px; }
+  .logo {
+    font-size: clamp(64px, 13vw, 128px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--red-2), var(--red) 60%, #8f1024);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+  }
+  .logo::after { content: "."; color: var(--red-2); -webkit-text-fill-color: var(--red-2); }
+  .strap {
+    margin-top: 18px;
+    font-size: clamp(20px, 3.4vw, 32px);
+    font-weight: 900;
+    letter-spacing: 0.01em;
+  }
+  .strap em { font-style: normal; color: var(--red-2); }
+  .substrap { margin-top: 10px; color: var(--dim); font-size: clamp(14px, 1.8vw, 17px); font-weight: 500; }
+
+  /* Choice */
+  .choice { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; margin-top: 44px; }
+  .pick {
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    padding: 20px 44px;
+    border-radius: 999px;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .pick:hover { transform: translateY(-3px) scale(1.02); }
+  .pick.eater {
+    background: linear-gradient(135deg, var(--red-2), var(--red));
+    color: #fff;
+    box-shadow: 0 10px 36px rgba(232,37,61,0.4);
+  }
+  .pick.eaten {
+    background: transparent;
+    color: var(--cream);
+    border: 3px solid rgba(253,242,236,0.35);
+  }
+  .pick.eaten:hover { border-color: var(--red-2); color: var(--red-2); }
+  .fineprint { margin-top: 22px; font-size: 12px; color: var(--dim); }
+
+  /* Match card */
+  .matchbox { display: none; margin: 48px auto 0; max-width: 420px; }
+  .matchbox.on { display: block; animation: pop 0.45s cubic-bezier(0.2, 1.4, 0.4, 1); }
+  @keyframes pop { from { opacity: 0; transform: scale(0.8) translateY(20px); } to { opacity: 1; transform: none; } }
+  .match-card {
+    background: var(--card);
+    border: 1px solid rgba(255,93,82,0.3);
+    border-radius: 22px;
+    padding: 34px 30px;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.5);
+  }
+  .match-card .big { font-size: 44px; }
+  .match-card h2 { font-size: 26px; font-weight: 900; margin: 10px 0 6px; }
+  .match-card h2 span { color: var(--red-2); }
+  .match-card p { color: var(--dim); font-size: 15px; }
+  .match-card .bar {
+    margin-top: 20px;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(253,242,236,0.12);
+    overflow: hidden;
+  }
+  .match-card .bar i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--red-2), var(--red));
+    transition: width 2.8s ease;
+  }
+  .match-card .status { margin-top: 10px; font-size: 13px; font-weight: 700; color: var(--red-2); min-height: 1.4em; }
+
+  /* Features */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    padding: clamp(60px, 10vh, 100px) 0;
+  }
+  .feat {
+    background: var(--bg-2);
+    border: 1px solid rgba(253,242,236,0.08);
+    border-radius: 16px;
+    padding: 26px;
+  }
+  .feat .ico { font-size: 28px; }
+  .feat h3 { font-size: 17px; font-weight: 900; margin: 10px 0 4px; }
+  .feat p { font-size: 14px; color: var(--dim); }
+
+  /* Quotes */
+  .quotes { text-align: center; padding-bottom: clamp(60px, 10vh, 100px); }
+  .quotes h2 { font-weight: 900; font-size: 24px; margin-bottom: 26px; }
+  .qrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .q {
+    background: var(--bg-2);
+    border-radius: 16px;
+    padding: 24px;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--cream);
+  }
+  .q b { display: block; margin-top: 12px; font-style: normal; font-size: 13px; color: var(--dim); font-weight: 700; }
+
+  footer {
+    border-top: 1px solid rgba(253,242,236,0.1);
+    padding: 36px 24px 50px;
+    text-align: center;
+    color: var(--dim);
+    font-size: 13px;
+  }
+  footer b { color: var(--cream); }
+  footer a { color: var(--red-2); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="logo">nibblr</div>
+    <p class="strap">Be the <em>eater</em>. Or the <em>eaten</em>.</p>
+    <p class="substrap">The world's first one-time-use dating app. One match. One meal. No second dates — by design.</p>
+
+    <div class="choice">
+      <button class="pick eater" data-role="eater">🍴 I'm the eater</button>
+      <button class="pick eaten" data-role="eaten">🍽️ I'm dinner</button>
+    </div>
+    <p class="fineprint">By choosing, you accept our Terms of Serving. All matches are final.</p>
+
+    <div class="matchbox" id="matchbox">
+      <div class="match-card">
+        <div class="big" id="m-ico">💘</div>
+        <h2>It's a <span>match</span></h2>
+        <p id="m-text">Someone 1.2 miles away has complementary dietary requirements.</p>
+        <div class="bar"><i id="m-bar"></i></div>
+        <div class="status" id="m-status">finding your other half…</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feat"><div class="ico">🔄</div><h3>Perfectly balanced matching</h3><p>Every eater is paired with exactly one volunteer. Supply meets demand. Economists love us.</p></div>
+    <div class="feat"><div class="ico">📅</div><h3>No ghosting</h3><p>Structurally impossible. One party is fully committed and the other is extremely present.</p></div>
+    <div class="feat"><div class="ico">⭐</div><h3>100% retention</h3><p>No user has ever come back to complain. Our churn rate is literally zero.</p></div>
+    <div class="feat"><div class="ico">🥗</div><h3>Dietary filters</h3><p>Organic? Free-range? Gym-fed? Filter by lifestyle, marbling and years of slow cooking under pressure.</p></div>
+  </section>
+
+  <section class="quotes">
+    <h2>What our users say</h2>
+    <div class="qrow">
+      <div class="q">"Finally, an app that understands commitment."<b>— Marcus, 34, eater</b></div>
+      <div class="q">"I just wanted to feel chosen."<b>— Glen, 41, dinner</b></div>
+      <div class="q">"We matched on a Tuesday. By Friday, he was inside me. Roughly 38% of him anyway."<b>— Priya, 29, eater</b></div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <p><b>nibblr is a joke.</b> It is a parody landing page for an app that does not, will not, and should not exist.</p>
+  <p>Please do not eat anyone. Not even a little bit. Not even if they seem really keen.</p>
+  <p style="margin-top:14px">a terrible idea lovingly hosted by <a href="https://rob-farrow.me.uk">Rob Farrow</a></p>
+</footer>
+
+<script>
+  const box = document.getElementById("matchbox");
+  const bar = document.getElementById("m-bar");
+  const status = document.getElementById("m-status");
+  const text = document.getElementById("m-text");
+  const ico = document.getElementById("m-ico");
+
+  const FLOW = {
+    eater: {
+      ico: "🍴",
+      text: "Someone 1.2 miles away has volunteered. They rated themselves 'best served with a red'.",
+      steps: ["checking appetite…", "verifying mutual enthusiasm…", "reserving a table for one…", "🔒 match finalised. bon appétit."]
+    },
+    eaten: {
+      ico: "🫀",
+      text: "Someone 1.2 miles away is very pleased to meet you. They've already set the table.",
+      steps: ["uploading your nutritional profile…", "verifying mutual enthusiasm…", "selecting a marinade…", "🔒 match finalised. thank you for your service."]
+    }
+  };
+
+  document.querySelectorAll(".pick").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const flow = FLOW[btn.dataset.role];
+      ico.textContent = flow.ico;
+      text.textContent = flow.text;
+      box.classList.add("on");
+      box.scrollIntoView({ behavior: "smooth", block: "center" });
+      bar.style.width = "0";
+      requestAnimationFrame(() => requestAnimationFrame(() => { bar.style.width = "100%"; }));
+      let i = 0;
+      status.textContent = flow.steps[0];
+      const t = setInterval(() => {
+        i++;
+        if (i >= flow.steps.length) { clearInterval(t); return; }
+        status.textContent = flow.steps[i];
+      }, 900);
+    });
+  });
+</script>
+</body>
+</html>
